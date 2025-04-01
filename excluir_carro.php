@@ -2,7 +2,8 @@
 session_start();
 require 'config/Database.php';
 
-if (!isset($_SESSION['usuario'])) {
+if (!isset($_SESSION['usuario_id'])) {
+    $_SESSION['pagina_origem'] = "cadastrar_carro.php";
     header("Location: login.php");
     exit();
 }

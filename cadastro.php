@@ -1,26 +1,23 @@
 <?php
-session_start();
 require 'config/Database.php';
 
+// Criar uma instância da classe Database e obter a conexão
 $db = new Database();
-$pdo = $db->conn;
-$erro = "";
+$pdo = $db->conn; // Agora $pdo está definido corretamente
+
+$erro = ""; // Inicializar a variável para evitar erro de variável indefinida
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nome = $_POST["nome"];
     $email = $_POST["email"];
-    $senha = $_POST["senha"];
+    $senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
 
-    $stmt = $pdo->prepare("SELECT id, nome, senha FROM usuarios WHERE email = ?");
-    $stmt->execute([$email]);
-    $user = $stmt->fetch();
-
-    if ($user && password_verify($senha, $user["senha"])) {
-        $_SESSION["usuario_id"] = $user["id"];
-        $_SESSION["usuario"] = $user["nome"]; // Agora o nome do usuário é armazenado corretamente
-        header("Location: dashboard.php");
+    $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)");
+    if ($stmt->execute([$nome, $email, $senha])) {
+        header("Location: login.php");
         exit();
     } else {
-        $erro = "E-mail ou senha incorretos!";
+        $erro = "Erro ao cadastrar!";
     }
 }
 ?>
@@ -29,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Cadastro</title>
     <style>
         body { 
             font-family: Arial, sans-serif; 
@@ -52,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-bottom: 10px;
         }
         input {
-            width: calc(100% - 20px); /* Mantém alinhado com o botão */
+            width: calc(100% - 20px);
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -88,19 +85,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="container">
-        <h2>Login</h2>
+        <h2>Cadastro</h2>
         <?php if (!empty($erro)) echo "<p>$erro</p>"; ?>
         <form method="POST">
+            <div class="form-group">
+                <input type="text" name="nome" placeholder="Nome" required>
+            </div>
             <div class="form-group">
                 <input type="email" name="email" placeholder="E-mail" required>
             </div>
             <div class="form-group">
                 <input type="password" name="senha" placeholder="Senha" required>
             </div>
-            <button type="submit">Entrar</button>
+            <button type="submit">Cadastrar</button>
         </form>
-        <a href="cadastro.php" class="link">Criar Conta</a>
+        <a href="login.php" class="link">Já tem uma conta? Faça login</a>
     </div>
 </body>
 </html>
-

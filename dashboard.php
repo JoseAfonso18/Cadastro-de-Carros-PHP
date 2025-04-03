@@ -39,7 +39,7 @@ $usuario_nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : "Usuário";
 </head>
 <body>
     <div class="container">
-        <h2>Bem-vindo, <?php echo htmlspecialchars($usuario_nome); ?>!</h2>
+        <h2>Olá, <?php echo htmlspecialchars($usuario_nome); ?>!</h2>
         <a href="index.php">Voltar ao Início</a>
         <a href="logout.php">Sair</a>
     </div>

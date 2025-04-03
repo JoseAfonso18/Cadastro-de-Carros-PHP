@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         .container {
             width: 90%;
-            max-width: 500px;
+            max-width: 400px; /* Reduzindo um pouco a largura */
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -67,46 +67,67 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         form {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            align-items: center; /* Isso centraliza os inputs */
+            gap: 12px;
         }
 
         input {
-            width: 100%;
-            padding: 10px;
+            width: 90%; /* Mantém um bom espaço nas laterais */
+            padding: 8px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 16px;
         }
 
-        button {
-            background: #007bff;
-            color: white;
-            padding: 10px;
-            border: none;
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+
+        .button-container button,
+        .button-container a {
+            width: 45%;
+            padding: 8px;
+            font-size: 14px;
             border-radius: 5px;
-            font-size: 16px;
+            text-decoration: none;
+            border: none;
             cursor: pointer;
             transition: background 0.3s;
         }
 
-        button:hover {
+        .button-container button {
+            background: #007bff;
+            color: white;
+        }
+
+        .button-container button:hover {
             background: #0056b3;
         }
 
-        .back-link {
-            display: inline-block;
-            margin-top: 15px;
-            text-decoration: none;
-            color: white;
+        .button-container a {
             background: #6c757d;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: background 0.3s;
+            color: white;
         }
 
-        .back-link:hover {
+        .button-container a:hover {
             background: #5a6268;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between; /* Distribui os botões */
+            gap: 15px; /* Adiciona espaçamento entre eles */
+            margin-top: 15px;
+        }
+
+        .button-container button,
+        .button-container a {
+            width: 50%; /* Aumenta a largura dos botões */
+            padding: 12px; /* Aumenta a altura */
+            font-size: 16px; /* Aumenta o tamanho da fonte */
+            border-radius: 8px; /* Deixa os botões mais arredondados */
         }
     </style>
 </head>
@@ -119,9 +140,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" name="marca" value="<?= $carro['marca'] ?>" placeholder="Marca" required>
             <input type="number" name="ano" value="<?= $carro['ano'] ?>" placeholder="Ano" required>
             <input type="text" name="preco" value="<?= $carro['preco'] ?>" placeholder="Preço" required>
-            <button type="submit">Salvar</button>
+
+            <div class="button-container">
+                <button type="submit">Salvar</button>
+                <a href="listar_carros.php">Voltar</a>
+            </div>
         </form>
-        <a href="listar_carros.php" class="back-link">Voltar</a>
     </div>
 </body>
 </html>

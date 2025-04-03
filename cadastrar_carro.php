@@ -60,27 +60,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        button {
-            background: #007bff;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .botoes {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
         }
-        button:hover {
-            background: #0056b3;
-        }
-        a {
+        .btn {
             text-decoration: none;
             color: white;
             background: #007bff;
-            padding: 10px;
+            padding: 10px 20px;
             border-radius: 5px;
             display: inline-block;
-            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
         }
-        a:hover {
+        .btn:hover {
             background: #0056b3;
         }
     </style>
@@ -93,10 +90,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" name="marca" placeholder="Marca" required>
             <input type="number" name="ano" placeholder="Ano" required>
             <input type="text" name="preco" placeholder="Preço" required>
-            <button type="submit">Cadastrar</button>
+            <div class="botoes">
+                <button type="submit" class="btn">Cadastrar</button>
+                <a href="listar_carros.php" class="btn">Ver lista de carros</a>
+            </div>
         </form>
-        <br>
-        <a href="listar_carros.php">Ver lista de carros</a>
     </div>
 </body>
 </html>

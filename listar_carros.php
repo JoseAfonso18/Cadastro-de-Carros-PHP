@@ -92,14 +92,19 @@ $carros = $conn->query("SELECT * FROM carros")->fetchAll(PDO::FETCH_ASSOC);
             background: #c82333;
         }
 
-        .btn-cadastrar {
-            display: inline-block;
+        .botoes {
             margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-cadastrar, .btn-voltar {
             background: #007bff;
             color: white;
         }
 
-        .btn-cadastrar:hover {
+        .btn-cadastrar:hover, .btn-voltar:hover {
             background: #0056b3;
         }
     </style>
@@ -109,12 +114,12 @@ $carros = $conn->query("SELECT * FROM carros")->fetchAll(PDO::FETCH_ASSOC);
         <h2>Lista de Carros Cadastrados</h2>
         <table>
             <tr>
-                <th>ID</th>
+                <th></th>
                 <th>Modelo</th>
                 <th>Marca</th>
                 <th>Ano</th>
                 <th>Preço</th>
-                <th>Ações</th>
+                <th></th>
             </tr>
             <?php foreach ($carros as $carro): ?>
                 <tr>
@@ -130,8 +135,10 @@ $carros = $conn->query("SELECT * FROM carros")->fetchAll(PDO::FETCH_ASSOC);
                 </tr>
             <?php endforeach; ?>
         </table>
-        <a href="cadastrar_carro.php" class="btn-cadastrar">Cadastrar Novo Carro</a>
+        <div class="botoes">
+            <a href="cadastrar_carro.php" class="btn-cadastrar">Cadastrar Novo Carro</a>
+            <a href="index.php" class="btn-voltar">Voltar para Tela Inicial</a>
+        </div>
     </div>
 </body>
 </html>
-

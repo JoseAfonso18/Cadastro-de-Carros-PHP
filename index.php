@@ -20,6 +20,22 @@ if (!isset($_SESSION['usuario_id'])) {
             margin: 0;
             padding: 0;
         }
+        .menu-superior {
+            position: absolute;
+            top: 10px;
+            right: 10px; /* Agora está no canto superior direito */
+        }
+        .menu-superior a {
+            text-decoration: none;
+            color: white;
+            background: #007bff;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .menu-superior a:hover {
+            background: #0056b3;
+        }
         .container {
             max-width: 600px;
             margin: 100px auto;
@@ -46,11 +62,15 @@ if (!isset($_SESSION['usuario_id'])) {
     </style>
 </head>
 <body>
+    <!-- Botão "Minha Conta" no canto superior direito -->
+    <div class="menu-superior">
+        <a href="dashboard.php">Minha Conta</a>
+    </div>
+
     <div class="container">
         <h1>Bem-vindo ao Cadastro de Carros</h1>
         <a href="cadastrar_carro.php">Cadastrar Novo Carro</a>
         <a href="listar_carros.php">Listar Carros</a>
-        <a href="dashboard.php">Dashboard</a>
         <a href="logout.php">Sair</a>
     </div>
 </body>
